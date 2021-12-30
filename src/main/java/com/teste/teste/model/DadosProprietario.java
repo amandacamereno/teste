@@ -5,20 +5,20 @@ import java.util.Date;
 public class DadosProprietario {
     private String nome;
     private String sobrenome;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
     private String sexo;
     private String rg;
-    private DadosProprietario dadosProprietario;
 
-    public DadosProprietario(String nome, String sobrenome, Date dataNascimento, String cpf, String sexo, String rg, DadosProprietario dadosProprietario) {
+
+    public DadosProprietario(String nome, String sobrenome, String dataNascimento, String cpf, String sexo, String rg) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.sexo = sexo;
         this.rg = rg;
-        this.dadosProprietario = dadosProprietario;
+
     }
 
     public String getNome() {
@@ -37,11 +37,11 @@ public class DadosProprietario {
         this.sobrenome = sobrenome;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -69,13 +69,6 @@ public class DadosProprietario {
         this.rg = rg;
     }
 
-    public DadosProprietario getDadosProprietario() {
-        return dadosProprietario;
+
     }
 
-    public void setDadosProprietario(DadosProprietario dadosProprietario) {
-        this.dadosProprietario = dadosProprietario;
-    }
-
-
-}
