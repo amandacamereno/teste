@@ -1,13 +1,26 @@
 package com.teste.teste.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 
+@Document
 public class DadosProprietario {
+    @Id
+    private String codigo;
+    @Schema(description = "Nome do proprietario", example = "Fernando")
     private String nome;
+    @Schema(description = "Sobrenome do proprietsrio", example = "Silva")
     private String sobrenome;
+    @Schema(description = "Data de nascimento do proprietario", example = "04/11/1972")
     private String dataNascimento;
+    @Schema(description = "CPF do proprietario", example = "12345678912")
     private String cpf;
+    @Schema(description = "sexo", example = "masculino")
     private String sexo;
+    @Schema(description = "Numero do documento", example = "123456789")
     private String rg;
 
 
@@ -69,6 +82,12 @@ public class DadosProprietario {
         this.rg = rg;
     }
 
-
+    public String getCodigo() {
+        return codigo;
     }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+}
 

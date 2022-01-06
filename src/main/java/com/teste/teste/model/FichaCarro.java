@@ -1,8 +1,13 @@
 package com.teste.teste.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class FichaCarro {
+    @Schema(description = "Multas", example = "sim")
     private Boolean multas;
+    @Schema(description = "ipva", example = "pago")
     private Boolean ipva;
+    @Schema(description = "roubado", example = "nao")
     private Boolean roubado;
     private Veiculo veiculo;
 
