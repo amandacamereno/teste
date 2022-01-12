@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+
 
 @Document
 public class DadosProprietario {
@@ -22,16 +22,22 @@ public class DadosProprietario {
     private String sexo;
     @Schema(description = "Numero do documento", example = "123456789")
     private String rg;
+    @Schema (description = "Telefone para contato", example = "912345678")
+    private String telefone;
 
 
-    public DadosProprietario(String nome, String sobrenome, String dataNascimento, String cpf, String sexo, String rg) {
+    public DadosProprietario(String nome, String sobrenome, String dataNascimento, String cpf, String sexo, String rg, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.sexo = sexo;
         this.rg = rg;
+        this.telefone = telefone;
 
+    }
+
+    public DadosProprietario() {
     }
 
     public String getNome() {
@@ -88,6 +94,14 @@ public class DadosProprietario {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
 
