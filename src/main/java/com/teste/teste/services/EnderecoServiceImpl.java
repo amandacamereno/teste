@@ -1,5 +1,6 @@
 package com.teste.teste.services;
 
+import com.teste.teste.DTO.EnderecoDTO;
 import com.teste.teste.model.Endereco;
 import com.teste.teste.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,32 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Override
     public List<Endereco> obterTodos() {
         return enderecoRepository.findAll();
+    }
+
+    @Override
+    public EnderecoDTO converteEndereco(Endereco endereco) {
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        enderecoDTO.setRua(endereco.getRua());
+        enderecoDTO.setPais(endereco.getPais());
+        enderecoDTO.setCidade(endereco.getCidade());
+        enderecoDTO.setBairro(endereco.getBairro());
+        enderecoDTO.setEstado(endereco.getEstado());
+        enderecoDTO.setNumero(endereco.getComplemento());
+        enderecoDTO.setComplemento(endereco.getCep());
+        return enderecoDTO;
+    }
+
+
+    @Override
+    public Endereco converteEnderecoDTO(EnderecoDTO enderecoDTO){
+        Endereco endereco = new Endereco();
+        endereco.setRua(enderecoDTO.getRua());
+        endereco.setPais(enderecoDTO.getPais());
+        endereco.setCidade(enderecoDTO.getCidade());
+        endereco.setBairro(enderecoDTO.getBairro());
+        endereco.setEstado(enderecoDTO.getEstado());
+        endereco.setNumero(enderecoDTO.getNumero());
+        endereco.setComplemento(enderecoDTO.getComplemento());
+        return endereco;
     }
 }

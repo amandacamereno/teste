@@ -1,5 +1,6 @@
 package com.teste.teste.services;
 
+import com.teste.teste.DTO.VeiculoDTO;
 import com.teste.teste.model.Veiculo;
 import com.teste.teste.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,29 @@ public class VeiculoServiceImpl implements VeiculoService {
     @Override
     public List<Veiculo> obterTodos() {
         return veiculoRepository.findAll();
+    }
+
+
+
+    @Override
+    public VeiculoDTO converteVeiculo(Veiculo veiculo){
+        VeiculoDTO veiculoDTO = new VeiculoDTO();
+        veiculoDTO.setAnoFabricacao(veiculo.getAnoFabricacao());
+        veiculoDTO.setMarcaVeiculo(veiculo.getMarcaVeiculo());
+        veiculoDTO.setModeloVeiculo(veiculo.getModeloVeiculo());
+        veiculoDTO.setCor(veiculo.getCor());
+        veiculoDTO.setPlacaCarro(veiculo.getPlacaCarro());
+        return veiculoDTO;
+    }
+
+    @Override
+    public Veiculo convertVeiculoDTO(VeiculoDTO veiculoDTO){
+        Veiculo veiculo = new Veiculo();
+        veiculo.setAnoFabricacao(veiculoDTO.getAnoFabricacao());
+        veiculo.setMarcaVeiculo(veiculoDTO.getMarcaVeiculo());
+        veiculo.setModeloVeiculo(veiculoDTO.getModeloVeiculo());
+        veiculo.setCor(veiculoDTO.getCor());
+        veiculo.setPlacaCarro(veiculoDTO.getPlacaCarro());
+        return veiculo;
     }
 }

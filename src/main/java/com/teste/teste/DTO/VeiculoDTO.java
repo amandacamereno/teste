@@ -1,26 +1,21 @@
-package com.teste.teste.model;
+package com.teste.teste.DTO;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.teste.teste.model.PlacaCarro;
+import com.teste.teste.model.Veiculo;
 
 import java.util.Date;
 
-@Document
-public class Veiculo {
-    @Id
+public class VeiculoDTO {
+
     private String codigo;
-    @Schema(description = "Ano de fabricaco", example = "1994")
     private Date anoFabricacao;
-    @Schema(description = "Modelo do veiculo", example = "corsa")
     private String modeloVeiculo;
-    @Schema(description = "Marca do veiculo ", example = "chevrolet")
     private String marcaVeiculo;
-    @Schema(description = "Cor do veiculo", example = "prata")
     private String cor;
     private PlacaCarro placaCarro;
 
-    public Veiculo(Date anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor, PlacaCarro placaCarro) {
+    public VeiculoDTO(String codigo, Date anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor, PlacaCarro placaCarro) {
+        this.codigo = codigo;
         this.anoFabricacao = anoFabricacao;
         this.modeloVeiculo = modeloVeiculo;
         this.marcaVeiculo = marcaVeiculo;
@@ -28,7 +23,23 @@ public class Veiculo {
         this.placaCarro = placaCarro;
     }
 
-    public Veiculo() {
+    public VeiculoDTO(Veiculo veiculo){
+        this.anoFabricacao = veiculo.getAnoFabricacao();
+        this.modeloVeiculo = veiculo.getModeloVeiculo();
+        this.marcaVeiculo = veiculo.getMarcaVeiculo();
+        this.cor = veiculo.getCor();
+        this.placaCarro = veiculo.getPlacaCarro();
+    }
+
+    public VeiculoDTO() {
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Date getAnoFabricacao() {
@@ -69,13 +80,5 @@ public class Veiculo {
 
     public void setPlacaCarro(PlacaCarro placaCarro) {
         this.placaCarro = placaCarro;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 }

@@ -2,6 +2,7 @@ package com.teste.teste.services;
 
 
 
+import com.teste.teste.DTO.VeiculoDTO;
 import com.teste.teste.model.Veiculo;
 
 import java.util.List;
@@ -15,6 +16,10 @@ public interface VeiculoService {
     Veiculo atualizar (Veiculo veiculo);
     Veiculo obterPorId (String id);
     List<Veiculo> obterTodos ();
+
+    VeiculoDTO converteVeiculo(Veiculo veiculo);
+    Veiculo convertVeiculoDTO(VeiculoDTO veiculoDTO);
+
 
 
 

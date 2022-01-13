@@ -30,6 +30,9 @@ public class PlacaCarro {
 
     }
 
+    public PlacaCarro() {
+    }
+
     public String getLetras() {
         return letras;
     }
