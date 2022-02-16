@@ -4,38 +4,42 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
+
 
 @Document
 public class Veiculo {
     @Id
     private String codigo;
     @Schema(description = "Ano de fabricaco", example = "1994")
-    private Date anoFabricacao;
+    private String anoFabricacao;
     @Schema(description = "Modelo do veiculo", example = "corsa")
+    @NotEmpty (message = "Campo obriatorio")
     private String modeloVeiculo;
     @Schema(description = "Marca do veiculo ", example = "chevrolet")
+    @NotEmpty (message = "Campo obriatorio")
     private String marcaVeiculo;
     @Schema(description = "Cor do veiculo", example = "prata")
+    @NotEmpty (message = "Campo obriatorio")
     private String cor;
-    private PlacaCarro placaCarro;
+    //private PlacaCarro placaCarro;
 
-    public Veiculo(Date anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor, PlacaCarro placaCarro) {
+    public Veiculo(String anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor) {
         this.anoFabricacao = anoFabricacao;
         this.modeloVeiculo = modeloVeiculo;
         this.marcaVeiculo = marcaVeiculo;
         this.cor = cor;
-        this.placaCarro = placaCarro;
+        //this.placaCarro = placaCarro;
     }
 
     public Veiculo() {
     }
 
-    public Date getAnoFabricacao() {
+    public String getAnoFabricacao() {
         return anoFabricacao;
     }
 
-    public void setAnoFabricacao(Date anoFabricacao) {
+    public void setAnoFabricacao(String anoFabricacao) {
         this.anoFabricacao = anoFabricacao;
     }
 
@@ -63,13 +67,9 @@ public class Veiculo {
         this.cor = cor;
     }
 
-    public PlacaCarro getPlacaCarro() {
-        return placaCarro;
-    }
+    //public PlacaCarro getPlacaCarro() {return placaCarro}
 
-    public void setPlacaCarro(PlacaCarro placaCarro) {
-        this.placaCarro = placaCarro;
-    }
+    //public void setPlacaCarro(PlacaCarro placaCarro) {this.placaCarro = placaCarro;}
 
     public String getCodigo() {
         return codigo;

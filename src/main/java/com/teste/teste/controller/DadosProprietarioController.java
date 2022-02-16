@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,20 +28,30 @@ public class DadosProprietarioController {
     Logger log = Logger.getLogger("com.teste.teste.controller");
 
     @Operation(summary="Salva dados proprietario")
-    @PostMapping("/salvarDadosProprietario")
+    @PostMapping("/admin/salvarDadosProprietario")
     @ResponseStatus (HttpStatus.CREATED)
-    public DadosProprietario salvar(@RequestBody DadosProprietarioDTO dadosProprietarioDTO) {
+    public DadosProprietario salvar(@Valid @RequestBody DadosProprietarioDTO dadosProprietarioDTO) {
+
+        log.info("Entrando no metodp salvar dados do proprietario");
+
         DadosProprietario dadosProprietario = dadosProprietarioService.convertDadosProprietarioDTO(dadosProprietarioDTO);
         dadosProprietarioService.salvar(dadosProprietario);
-    log.info("Dados do proprietario salvos com sucesso retornando no corpo da requisicao os dados do proprietario e Status Created");
+
+        log.info("Dados do proprietario salvos com sucesso retornando no corpo da requisicao os dados do proprietario e Status Created");
         return dadosProprietario;
     }
 
     @Operation(summary="Deletar dados proprietario")
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/admin/{id}")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
+        log.info("Entrando no metodo deletar dados");
+
         if (!dadosProprietarioRepository.existsById(id)){
+            log.info("Dados nao encontrados");
+
+            log.info("Proprietario nao encontrado");
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -54,9 +65,13 @@ public class DadosProprietarioController {
     @Operation(summary="Obter dados")
     @GetMapping
     public ResponseEntity<List<DadosProprietario>> obterTodos() {
+
+        log.info("Entrando no metodo retornar Dados do proprietario");
+
         List<DadosProprietario> lista = dadosProprietarioService.obterTodos();
 
         if(lista.isEmpty()){
+            log.info("Dados nao encontrados");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -68,7 +83,10 @@ public class DadosProprietarioController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<DadosProprietario> obterPorCodigo(@PathVariable String id) {
 
+        log.info("Entrando no metodo retornar dadoss do proprietario");
+
         if (!dadosProprietarioRepository.existsById(id)){
+            log.info("Dados nao encontrados");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -77,20 +95,18 @@ public class DadosProprietarioController {
     }
 
     @Operation(summary="Atualizar dados")
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/admin/{id}")
     public ResponseEntity<DadosProprietario> atualizar(@PathVariable String id, @RequestBody DadosProprietarioDTO dadosProprietarioDTO) {
+        log.info("Entrando no metodo atualizar dados");
 
         DadosProprietario dadosProprietario = dadosProprietarioService.convertDadosProprietarioDTO(dadosProprietarioDTO);
-        boolean dadosPrprietarioExiste = this.dadosProprietarioRepository.existsById(dadosProprietario.getCodigo());
 
-            if (!dadosPrprietarioExiste){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+
 
             dadosProprietario.setCodigo(id);
             dadosProprietario = dadosProprietarioService.atualizar(dadosProprietario);
 
         log.info("Dados do proprietario atualizados com sucesso e retornando Status ok");
-        return ResponseEntity.ok().body(dadosProprietarioService.atualizar(dadosProprietario));
+        return ResponseEntity.ok().body(dadosProprietario);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DadosProprietarioServiceImpl implements DadosProprietarioService {
@@ -25,7 +26,12 @@ public class DadosProprietarioServiceImpl implements DadosProprietarioService {
     }
 
     @Override
-    public DadosProprietario atualizar(DadosProprietario dadosProprietario) {return dadosProprietarioRepository.save(dadosProprietario);}
+    public DadosProprietario atualizar(DadosProprietario dadosProprietario) {
+        Optional<DadosProprietario> dadosProprietarioid = dadosProprietarioRepository.findById(dadosProprietario.getCodigo());
+        if(dadosProprietarioid.isEmpty()){
+            throw new RuntimeException("Informacao nao  encontrada");
+        }
+        return dadosProprietarioRepository.save(dadosProprietario);}
 
 
     @Override

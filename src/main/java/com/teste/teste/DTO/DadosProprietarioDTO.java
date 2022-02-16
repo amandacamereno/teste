@@ -1,18 +1,40 @@
 package com.teste.teste.DTO;
 
-import com.teste.teste.model.DadosProprietario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class DadosProprietarioDTO {
-    private String codigo;
+    @Schema(description = "Nome do proprietario", example = "Fernando")
+    @NotEmpty(message = "Campo obriatorio")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String nome;
+    @Schema(description = "Sobrenome do proprietsrio", example = "Silva")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String sobrenome;
+    @Schema(description = "Data de nascimento do proprietario", example = "04/11/1972")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9;/ ]+$", message = "O campo deve conter apenas numeros")
     private String dataNascimento;
+    @Schema(description = "CPF do proprietario", example = "12345678912")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9; ]+$", message = "O campo deve conter apenas numeros")
     private String cpf;
+    @Schema(description = "sexo", example = "masculino")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String sexo;
+    @Schema(description = "Numero do documento", example = "123456789")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9; ]+$", message = "O campo deve conter apenas numeros")
     private String rg;
+    @Schema (description = "Telefone para contato", example = "912345678")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9; ]+$", message = "O campo deve conter apenas numeros")
     private String telefone;
+
 
     public DadosProprietarioDTO(String nome, String sobrenome, String dataNascimento, String cpf, String sexo, String rg, String telefone) {
         this.nome = nome;
@@ -24,25 +46,11 @@ public class DadosProprietarioDTO {
         this.telefone = telefone;
     }
 
-    public DadosProprietarioDTO(DadosProprietario dadosProprietario){
-        this.nome = dadosProprietario.getNome();
-        this.sobrenome = dadosProprietario.getSobrenome();
-        this.dataNascimento = dadosProprietario.getCpf();
-        this.cpf = dadosProprietario.getSexo();
-        this.sexo = dadosProprietario.getRg();
-        this.telefone = dadosProprietario.getTelefone();
-    }
 
     public DadosProprietarioDTO() {
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public String getNome() {
         return nome;

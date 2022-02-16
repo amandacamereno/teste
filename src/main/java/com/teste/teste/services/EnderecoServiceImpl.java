@@ -1,12 +1,14 @@
 package com.teste.teste.services;
 
 import com.teste.teste.DTO.EnderecoDTO;
+import com.teste.teste.model.DadosProprietario;
 import com.teste.teste.model.Endereco;
 import com.teste.teste.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService {
@@ -26,6 +28,11 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Override
     public Endereco atualizar(Endereco endereco) {
+        Optional<Endereco> enderecoid = enderecoRepository.findById(endereco.getCodigo());
+        if(enderecoid.isEmpty()){
+            throw new RuntimeException("Endereco nao  encontrado");
+        }
+
         return  enderecoRepository.save(endereco);
     }
 

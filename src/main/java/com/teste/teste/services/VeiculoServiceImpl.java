@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VeiculoServiceImpl implements VeiculoService {
@@ -25,7 +26,16 @@ public class VeiculoServiceImpl implements VeiculoService {
     }
 
     @Override
-    public Veiculo atualizar(Veiculo veiculo) {return veiculoRepository.save(veiculo); }
+    public Veiculo atualizar(Veiculo veiculo) {
+        Optional<Veiculo> veiculoid = veiculoRepository.findById(veiculo.getCodigo());
+        if(veiculoid.isEmpty()){
+            throw new RuntimeException("Veiculo nao encontrado");
+        }
+
+        return veiculoRepository.save(veiculo);
+    }
+
+
 
     @Override
     public Veiculo obterPorId(String id) {
@@ -42,11 +52,11 @@ public class VeiculoServiceImpl implements VeiculoService {
     @Override
     public VeiculoDTO converteVeiculo(Veiculo veiculo){
         VeiculoDTO veiculoDTO = new VeiculoDTO();
-        veiculoDTO.setAnoFabricacao(veiculo.getAnoFabricacao());
+        veiculoDTO.setAnoFabricacao (veiculo.getAnoFabricacao());
         veiculoDTO.setMarcaVeiculo(veiculo.getMarcaVeiculo());
         veiculoDTO.setModeloVeiculo(veiculo.getModeloVeiculo());
         veiculoDTO.setCor(veiculo.getCor());
-        veiculoDTO.setPlacaCarro(veiculo.getPlacaCarro());
+        //veiculoDTO.setPlacaCarro(veiculo.getPlacaCarro());
         return veiculoDTO;
     }
 
@@ -57,7 +67,7 @@ public class VeiculoServiceImpl implements VeiculoService {
         veiculo.setMarcaVeiculo(veiculoDTO.getMarcaVeiculo());
         veiculo.setModeloVeiculo(veiculoDTO.getModeloVeiculo());
         veiculo.setCor(veiculoDTO.getCor());
-        veiculo.setPlacaCarro(veiculoDTO.getPlacaCarro());
+        //veiculo.setPlacaCarro(veiculoDTO.getPlacaCarro());
         return veiculo;
     }
 }

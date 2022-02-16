@@ -4,21 +4,29 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
+
 @Document
 public class Endereco {
     @Id
     private String codigo;
     @Schema(description = "rua", example = "Avenida Brasil")
+    @NotEmpty(message = "Campo obriatorio")
     private String rua;
     @Schema(description = "pais", example = "Brasil")
+    @NotEmpty (message = "Campo obriatorio")
     private String pais;
     @Schema(description = "cidade", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String cidade;
     @Schema(description = "bairro", example = "Cidade Jardins")
+    @NotEmpty (message = "Campo obriatorio")
     private String bairro;
     @Schema(description = "estado", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String estado;
     @Schema(description = "Numero da casa", example = "123")
+    @NotEmpty (message = "Campo obriatorio")
     private String numero;
     @Schema(description = "Complemento do endereco", example = "apto 12")
     private String complemento;

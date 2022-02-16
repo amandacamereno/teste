@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -31,20 +32,28 @@ public class VeiculoController {
     Logger log = Logger.getLogger("com.teste.teste.controller");
 
     @Operation(summary="Salva um veiculo")
-    @PostMapping("/salvarVeiculo")
+    @PostMapping("/admin/salvarVeiculo")
     @ResponseStatus (HttpStatus.CREATED)
-    public Veiculo salvar (@RequestBody VeiculoDTO veiculoDTO) {
+    public Veiculo salvar (@Valid @RequestBody VeiculoDTO veiculoDTO) {
+
+        log.info("Entrando no metodo salvar veiculo");
+
         Veiculo veiculo = veiculoService.convertVeiculoDTO(veiculoDTO);
-        veiculoService.salvar(veiculo);
+
         log.info("Veiculo salvo com sucesso retornando no corpo da requisicao o veiculo e Status Created");
+        veiculoService.salvar(veiculo);
+
         return veiculo;
     }
 
     @Operation(summary="Deletar um veiculo")
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/admin/{id}")
     public ResponseEntity <Void> deletar (@PathVariable String id) {
 
+        log.info("Entrando no metodo deletar veiculo");
+
         if(!veiculoRepository.existsById(id)){
+            log.info("Veiculo nao encontrado");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -58,9 +67,13 @@ public class VeiculoController {
     @Operation(summary="Obter um veiculo")
     @GetMapping
     public ResponseEntity<List<Veiculo>> obterTodos () {
+
+        log.info("Entrando no metodo retornar veiculo");
+
         List<Veiculo> lista = veiculoService.obterTodos();
 
         if(lista.isEmpty()){
+            log.info("Veiculo nao encontrado");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -72,7 +85,10 @@ public class VeiculoController {
     @GetMapping (path = "/{id}")
     public ResponseEntity<Veiculo> obterPorCodigo (@PathVariable String id) {
 
+        log.info("Entrando no metodo retornar veiculo");
+
         if (!veiculoRepository.existsById(id)){
+            log.info("Veiculo nao encontrado");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -81,20 +97,20 @@ public class VeiculoController {
     }
 
     @Operation(summary="Atualizar um veiculo")
-    @PutMapping (path = "/{id}")
+    @PutMapping (path = "/admin/{id}")
     public ResponseEntity<Veiculo> atualizar(@PathVariable String id, @RequestBody VeiculoDTO veiculoDTO) {
 
-        Veiculo veiculo = veiculoService.convertVeiculoDTO(veiculoDTO);
-        boolean veiculoExiste = this.veiculoRepository.existsById(veiculo.getCodigo());
+        log.info("Entrando no metodo atualizar veiculo");
 
-            if (!veiculoExiste){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+        Veiculo veiculo = veiculoService.convertVeiculoDTO(veiculoDTO);
+
+
+
 
             veiculo.setCodigo(id);
             veiculo = veiculoService.atualizar(veiculo);
 
         log.info("Veiculo atualizados com sucesso e retornando Status ok");
-        return ResponseEntity.ok().body(veiculoService.atualizar(veiculo));
+        return ResponseEntity.ok().body(veiculo);
     }
 }

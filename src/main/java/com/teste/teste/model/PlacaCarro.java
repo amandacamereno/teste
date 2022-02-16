@@ -4,19 +4,26 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
+
 @Document
 public class PlacaCarro {
    @Id
     private String codigo;
     @Schema(description = "Sequencia de letras", example = "abc")
+    @NotEmpty(message = "Campo obriatorio")
     private String letras;
     @Schema(description = "Sequencia de numeros", example = "1234")
+    @NotEmpty (message = "Campo obriatorio")
     private String numeros;
     @Schema(description = "Modelo da placa", example = "antigo")
+    @NotEmpty (message = "Campo obriatorio")
     private String modelo;
     @Schema(description = "Cidade de registro da placa", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String cidade;
     @Schema(description = "Estado de registro da placa", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String estado;
 
 

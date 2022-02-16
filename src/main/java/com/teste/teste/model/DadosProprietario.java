@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 
 @Document
@@ -11,8 +13,10 @@ public class DadosProprietario {
     @Id
     private String codigo;
     @Schema(description = "Nome do proprietario", example = "Fernando")
+    @NotEmpty (message = "Campo obriatorio")
     private String nome;
     @Schema(description = "Sobrenome do proprietsrio", example = "Silva")
+    @NotEmpty (message = "O campo sobrenome deve ser preenchido")
     private String sobrenome;
     @Schema(description = "Data de nascimento do proprietario", example = "04/11/1972")
     private String dataNascimento;

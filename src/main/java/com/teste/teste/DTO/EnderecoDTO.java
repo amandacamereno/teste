@@ -1,21 +1,39 @@
 package com.teste.teste.DTO;
 
-import com.teste.teste.model.Endereco;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class EnderecoDTO {
-
-    private String codigo;
+    @Schema(description = "rua", example = "Avenida Brasil")
+    @NotEmpty(message = "Campo obriatorio")
     private String rua;
+    @Schema(description = "pais", example = "Brasil")
+    @NotEmpty (message = "Campo obriatorio")
     private String pais;
+    @Schema(description = "cidade", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String cidade;
+    @Schema(description = "bairro", example = "Cidade Jardins")
+    @NotEmpty (message = "Campo obriatorio")
     private String bairro;
+    @Schema(description = "estado", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String estado;
+    @Schema(description = "Numero da casa", example = "123")
+    @NotEmpty (message = "Campo obriatorio")
     private String numero;
+    @Schema(description = "Complemento do endereco", example = "apto 12")
+    @NotEmpty (message = "Campo obriatorio")
     private String complemento;
+    @NotEmpty (message = "Campo obriatorio")
+    @Schema(description = "Numero do CEP", example = "12345678")
     private String cep;
 
-    public EnderecoDTO(String codigo, String rua, String pais, String cidade, String bairro, String estado, String numero, String complemento, String cep) {
-        this.codigo = codigo;
+
+    public EnderecoDTO( String rua, String pais, String cidade, String bairro, String estado, String numero, String complemento, String cep) {
         this.rua = rua;
         this.pais = pais;
         this.cidade = cidade;
@@ -26,28 +44,11 @@ public class EnderecoDTO {
         this.cep = cep;
     }
 
-    public EnderecoDTO(Endereco endereco){
-        this.rua = endereco.getRua();
-        this.pais = endereco.getPais();
-        this.cidade = endereco.getCidade();
-        this.bairro = endereco.getBairro();
-        this.estado = endereco.getEstado();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-        this.cep = endereco.getCep();
 
-    }
 
     public EnderecoDTO() {
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public String getRua() {
         return rua;

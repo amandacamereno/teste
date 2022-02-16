@@ -1,52 +1,47 @@
 package com.teste.teste.DTO;
 
-import com.teste.teste.model.PlacaCarro;
-import com.teste.teste.model.Veiculo;
 
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 
 public class VeiculoDTO {
-
-    private String codigo;
-    private Date anoFabricacao;
+    @Schema(description = "Ano de fabricaco", example = "1994")
+    @NotEmpty(message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9;/ ]+$", message = "O campo deve conter apenas numeros")
+    private String anoFabricacao;
+    @Schema(description = "Modelo do veiculo", example = "corsa")
+    @NotEmpty (message = "Campo obriatorio")
     private String modeloVeiculo;
+    @Schema(description = "Marca do veiculo ", example = "chevrolet")
+    @NotEmpty (message = "Campo obriatorio")
     private String marcaVeiculo;
+    @Schema(description = "Cor do veiculo", example = "prata")
+    @NotEmpty (message = "Campo obriatorio")
     private String cor;
-    private PlacaCarro placaCarro;
+    //@NotEmpty (message = "Campo obriatorio")
+    //private PlacaCarro placaCarro;
 
-    public VeiculoDTO(String codigo, Date anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor, PlacaCarro placaCarro) {
-        this.codigo = codigo;
+    public VeiculoDTO( String anoFabricacao, String modeloVeiculo, String marcaVeiculo, String cor) {
         this.anoFabricacao = anoFabricacao;
         this.modeloVeiculo = modeloVeiculo;
         this.marcaVeiculo = marcaVeiculo;
         this.cor = cor;
-        this.placaCarro = placaCarro;
+       // this.placaCarro = placaCarro;
     }
 
-    public VeiculoDTO(Veiculo veiculo){
-        this.anoFabricacao = veiculo.getAnoFabricacao();
-        this.modeloVeiculo = veiculo.getModeloVeiculo();
-        this.marcaVeiculo = veiculo.getMarcaVeiculo();
-        this.cor = veiculo.getCor();
-        this.placaCarro = veiculo.getPlacaCarro();
-    }
+
 
     public VeiculoDTO() {
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Date getAnoFabricacao() {
+    public String getAnoFabricacao() {
         return anoFabricacao;
     }
 
-    public void setAnoFabricacao(Date anoFabricacao) {
+    public void setAnoFabricacao(String anoFabricacao) {
         this.anoFabricacao = anoFabricacao;
     }
 
@@ -74,11 +69,7 @@ public class VeiculoDTO {
         this.cor = cor;
     }
 
-    public PlacaCarro getPlacaCarro() {
-        return placaCarro;
-    }
+   // public PlacaCarro getPlacaCarro() {return placaCarro;}
 
-    public void setPlacaCarro(PlacaCarro placaCarro) {
-        this.placaCarro = placaCarro;
-    }
+   // public void setPlacaCarro(PlacaCarro placaCarro) {this.placaCarro = placaCarro;}
 }

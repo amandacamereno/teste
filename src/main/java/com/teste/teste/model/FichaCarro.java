@@ -2,12 +2,17 @@ package com.teste.teste.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import javax.validation.constraints.NotEmpty;
+
 public class FichaCarro {
     @Schema(description = "Multas", example = "sim")
+    @NotEmpty(message = "Campo obriatorio")
     private Boolean multas;
     @Schema(description = "ipva", example = "pago")
+    @NotEmpty (message = "Campo obriatorio")
     private Boolean ipva;
     @Schema(description = "roubado", example = "nao")
+    @NotEmpty (message = "Campo obriatorio")
     private Boolean roubado;
     private Veiculo veiculo;
 

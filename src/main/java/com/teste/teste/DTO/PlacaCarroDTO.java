@@ -1,34 +1,35 @@
 package com.teste.teste.DTO;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class PlacaCarroDTO {
-    private String codigo;
+    @Schema(description = "Sequencia de letras", example = "abc")
+    @NotEmpty(message = "Campo obriatorio")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String letras;
+    @Schema(description = "Sequencia de numeros", example = "1234")
+    @NotEmpty (message = "Campo obriatorio")
+    @Pattern(regexp = "^[0-9;]+$", message = "O campo deve conter apenas numeros")
     private String numeros;
+    @Schema(description = "Modelo da placa", example = "antigo")
+    @NotEmpty (message = "Campo obriatorio")
     private String modelo;
+    @Schema(description = "Cidade de registro da placa", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String cidade;
+    @Schema(description = "Estado de registro da placa", example = "Sao Paulo")
+    @NotEmpty (message = "Campo obriatorio")
     private String estado;
 
-    public PlacaCarroDTO(String codigo, String letras, String numeros, String modelo, String cidade, String estado) {
-        this.codigo = codigo;
-        this.letras = letras;
-        this.numeros = numeros;
-        this.modelo = modelo;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
+
 
     public PlacaCarroDTO() {
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public String getLetras() {
         return letras;
